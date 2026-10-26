@@ -7,17 +7,13 @@
 
 This project documents a digital communications laboratory experiment investigating how modulation order and wireless propagation conditions affect received signal quality. Signals were generated using a **Rohde & Schwarz SMIQ3B** RF signal generator and examined through constellation and eye diagrams.
 
-> **Main observation:** In the reported wireless measurements, 256-QAM showed noticeable constellation spreading and noise, while QPSK was comparatively robust. Partial antenna obstruction produced distortion and symbol overlap.
+> **Main observation from the lab report:** 256-QAM showed noticeable constellation spreading and noise in the antenna-based setup, while QPSK was comparatively robust. Partial antenna obstruction produced distortion and symbol overlap.
 
-## Contents
+## Constellation overview
 
-- [Objectives](#objectives)
-- [Equipment and setup](#equipment-and-setup)
-- [Modulation schemes](#modulation-schemes)
-- [Methodology](#methodology)
-- [Results and observations](#results-and-observations)
-- [Limitations](#limitations)
-- [Repository structure](#repository-structure)
+The graphic below is a **synthetic illustration** showing ideal symbol locations and slightly perturbed samples. It is not a screenshot of the hardware measurement and does not represent a calibrated SNR or measured BER.
+
+![Illustrative square-QAM constellation comparison](images/qam-constellation-illustration.svg)
 
 ## Objectives
 
@@ -37,7 +33,7 @@ This project documents a digital communications laboratory experiment investigat
 | Link conditions | Wired and antenna-based wireless |
 | Visual analysis | Constellation diagrams and eye diagrams |
 
-The report also describes QPSK trials at 1 kbit/s and 10 kbit/s. Detailed numerical performance datasets such as BER, EVM, and measured SNR were not reported.
+The report also describes QPSK trials at 1 kbit/s and 10 kbit/s. Numerical performance datasets such as BER, EVM, and measured SNR were not reported.
 
 ## Modulation schemes
 
@@ -46,28 +42,28 @@ The report also describes QPSK trials at 1 kbit/s and 10 kbit/s. Detailed numeri
 | QPSK | 2 | More robust symbol separation |
 | 16-QAM | 4 | Higher spectral efficiency, greater sensitivity than QPSK |
 | 64-QAM | 6 | Denser constellation and tighter decision margins |
-| 256-QAM | 8 | Highest spectral efficiency of the tested schemes; most sensitive to signal impairments |
+| 256-QAM | 8 | Highest spectral efficiency of the tested schemes; more sensitive to signal impairments |
 
 Higher-order QAM packs more symbols into the constellation. As a result, noise and distortion can make correct symbol decisions more difficult.
 
-## Methodology
+## Experimental methodology
 
 1. Configure the SMIQ3B for the selected modulation scheme.
 2. Generate and inspect QPSK and QAM signals.
 3. Examine constellation and eye diagrams in the wired setup.
 4. Repeat observations with antenna-based wireless transmission.
 5. Observe signal quality under antenna alignment changes and partial obstruction.
-6. Compare the qualitative effects of the channel conditions across modulation orders.
+6. Compare the qualitative effects of channel conditions across modulation orders.
 
 ## Results and observations
 
 ### QPSK
 
-The report describes QPSK as comparatively robust, with clear symbol separation and minimal overlap. Its antenna-based eye/constellation view provides a useful baseline for comparison.
+The report describes QPSK as comparatively robust, with clear symbol separation and minimal overlap. Its antenna-based eye/constellation view provides a useful baseline.
 
 ### 16-QAM
 
-The 16-QAM wired measurements show a denser constellation than QPSK. This illustrates the increased symbol density that accompanies higher bits per symbol.
+The 16-QAM wired measurements show a denser constellation than QPSK, illustrating the increased symbol density associated with more bits per symbol.
 
 ### 64-QAM and 256-QAM
 
@@ -79,27 +75,28 @@ The report records noticeable noise and spreading in the 256-QAM antenna measure
 
 **Overall finding:** The experiment demonstrated the trade-off between spectral efficiency and robustness. QPSK was comparatively tolerant of the tested conditions, while higher-order QAM—especially 256-QAM—showed more visible degradation.
 
-## Measurement gallery
+## Reproduce the illustrative simulation
 
-Add selected, permitted screenshots to `images/` and use the suggested names below. Until those files are added, the image links will not render.
+A small Python script provides a separate, repeatable demonstration of how additive noise in normalized I/Q coordinates appears for different square-QAM orders. This is an educational simulation, not a reconstruction or replacement for the hardware experiment.
 
-| Suggested image | What it should show |
-|---|---|
-| `images/qpsk-wireless.png` | QPSK constellation / eye diagram with antenna |
-| `images/16qam-wired.png` | 16-QAM wired constellation |
-| `images/64qam-wireless.png` | 64-QAM antenna measurement |
-| `images/256qam-wireless.png` | 256-QAM antenna measurement |
-| `images/antenna-obstructed.png` | Partially blocked antenna condition |
+### Setup
 
-Example Markdown once images are uploaded:
-
-```md
-![256-QAM wireless measurement](images/256qam-wireless.png)
+```bash
+python -m pip install -r requirements.txt
+python analysis/qam_awgn_demo.py
 ```
+
+By default, the script saves `images/qam-awgn-simulation.png`. You can change the modulation orders, noise level, number of samples, random seed, and output path:
+
+```bash
+python analysis/qam_awgn_demo.py --orders 4 16 64 256 --noise-std 0.06 --samples 1500 --seed 7
+```
+
+The `--noise-std` value is expressed in normalized constellation-coordinate units. It is **not** a calibrated SNR. No BER, EVM, or RF channel-performance claims are derived from this simulation.
 
 ## Limitations
 
-This repository currently summarizes qualitative observations from the lab report. It does **not** claim quantitative BER, EVM, or SNR results because those values were not established in the supplied report. Screenshots should be described as measured laboratory results, and any future simulated plots or code-generated examples should be clearly labelled as simulations.
+This repository summarizes qualitative observations from the supplied lab report. It does **not** claim quantitative BER, EVM, or SNR results because corresponding measurement data were not established in the report. Keep generated plots clearly labelled as simulations and any future hardware screenshots labelled as measured results.
 
 ## Repository structure
 
@@ -107,25 +104,28 @@ This repository currently summarizes qualitative observations from the lab repor
 iq-modulation-wireless-analysis/
 ├── README.md
 ├── images/
-│   └── (add selected lab screenshots here)
+│   └── qam-constellation-illustration.svg
+├── analysis/
+│   └── qam_awgn_demo.py
 ├── docs/
-│   └── (optional sanitized report or notes)
-└── analysis/
-    └── (optional scripts or notebooks, if developed)
+│   └── measurement-notes.md
+├── requirements.txt
+└── .gitignore
 ```
 
 ## Skills demonstrated
 
 - Digital communications and I/Q modulation concepts
 - QPSK and QAM modulation trade-offs
-- RF signal generation using laboratory equipment
+- RF signal generation with laboratory equipment
 - Constellation and eye-diagram interpretation
 - Wired versus wireless link comparison
-- Qualitative analysis of alignment and obstruction effects
-- Technical documentation of experimental results
+- Qualitative analysis of antenna alignment and obstruction effects
+- Python-based visualization of a clearly separated educational simulation
+- Technical documentation of experimental results and limitations
 
 ## Academic context
 
 Based on a Digital Communications laboratory experiment on I/Q coherent modulation and wireless transmission at Hamburg University of Applied Sciences (HAW Hamburg), conducted in July 2025.
 
-Please ensure any report, photograph, or measurement screenshot shared publicly complies with university/course rules and does not expose other participants' personal information.
+Please ensure any lab screenshots, photographs, or full report shared publicly comply with course/university rules and do not expose other participants' personal information.
