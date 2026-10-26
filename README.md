@@ -30,6 +30,14 @@ These selected screenshots come from the laboratory report. The observations bel
     <td><img src="images/qpsk-wireless.jpg" alt="QPSK constellation and eye diagram from the antenna-based measurement" width="320"></td>
     <td><img src="images/16qam-wired.jpg" alt="16-QAM wired constellation measurement" width="320"></td>
   </tr>
+  <tr>
+    <td align="center"><b>256-QAM — wireless / antenna setup</b></td>
+    <td align="center"><b>Partial antenna obstruction</b></td>
+  </tr>
+  <tr>
+    <td><img src="images/256qam-wireless.jpg" alt="256-QAM antenna measurement showing noise and constellation spreading" width="320"></td>
+    <td><img src="images/antenna-obstructed.jpg" alt="Constellation with a partially obstructed antenna, showing distortion and symbol overlap" width="320"></td>
+  </tr>
 </table>
 
 The report describes QPSK as comparatively robust with clear symbol separation. The wired 16-QAM screenshot shows a denser constellation. The report also notes more noticeable spreading/noise for 256-QAM in the antenna setup and distortion/symbol overlap when the antenna was partially obstructed.
