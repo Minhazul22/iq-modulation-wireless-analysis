@@ -5,6 +5,8 @@
   QPSK · 16-QAM · 64-QAM · 256-QAM · Wired vs. Wireless RF
 </p>
 
+![Python checks](https://github.com/Minhazul22/iq-modulation-wireless-analysis/actions/workflows/python-tests.yml/badge.svg)
+
 This project documents a digital communications laboratory experiment investigating how modulation order and wireless propagation conditions affect received signal quality. Signals were generated using a **Rohde & Schwarz SMIQ3B** RF signal generator and examined through constellation and eye diagrams.
 
 > **Main observation from the lab report:** 256-QAM showed noticeable constellation spreading and noise in the antenna-based setup, while QPSK was comparatively robust. Partial antenna obstruction produced distortion and symbol overlap.
