@@ -17,6 +17,23 @@ The graphic below is a **synthetic illustration** showing ideal symbol locations
 
 ![Illustrative square-QAM constellation comparison](images/qam-constellation-illustration.svg)
 
+## Selected hardware measurement screenshots
+
+These selected screenshots come from the laboratory report. The observations below are qualitative; screenshots are presented as visual evidence, not as numerical BER/EVM/SNR measurements.
+
+<table>
+  <tr>
+    <td align="center"><b>QPSK — wireless / antenna setup</b></td>
+    <td align="center"><b>16-QAM — wired setup</b></td>
+  </tr>
+  <tr>
+    <td><img src="images/qpsk-wireless.jpg" alt="QPSK constellation and eye diagram from the antenna-based measurement" width="320"></td>
+    <td><img src="images/16qam-wired.jpg" alt="16-QAM wired constellation measurement" width="320"></td>
+  </tr>
+</table>
+
+The report describes QPSK as comparatively robust with clear symbol separation. The wired 16-QAM screenshot shows a denser constellation. The report also notes more noticeable spreading/noise for 256-QAM in the antenna setup and distortion/symbol overlap when the antenna was partially obstructed.
+
 ## Objectives
 
 - Investigate coherent in-phase/quadrature (I/Q) modulation.
