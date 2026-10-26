@@ -94,6 +94,16 @@ python analysis/qam_awgn_demo.py --orders 4 16 64 256 --noise-std 0.06 --samples
 
 The `--noise-std` value is expressed in normalized constellation-coordinate units. It is **not** a calibrated SNR. No BER, EVM, or RF channel-performance claims are derived from this simulation.
 
+## Tests and automation
+
+The project includes unit tests for the ideal constellation generator and a GitHub Actions workflow that runs the tests on Python 3.10 and 3.12, then smoke-tests the plotting command.
+
+To run the tests locally:
+
+```bash
+python -m unittest discover -s analysis -p 'test_*.py'
+```
+
 ## Limitations
 
 This repository summarizes qualitative observations from the supplied lab report. It does **not** claim quantitative BER, EVM, or SNR results because corresponding measurement data were not established in the report. Keep generated plots clearly labelled as simulations and any future hardware screenshots labelled as measured results.
@@ -106,9 +116,13 @@ iq-modulation-wireless-analysis/
 ├── images/
 │   └── qam-constellation-illustration.svg
 ├── analysis/
-│   └── qam_awgn_demo.py
+│   ├── qam_awgn_demo.py
+│   └── test_qam_awgn_demo.py
 ├── docs/
 │   └── measurement-notes.md
+├── .github/
+│   └── workflows/
+│       └── python-tests.yml
 ├── requirements.txt
 └── .gitignore
 ```
@@ -122,6 +136,7 @@ iq-modulation-wireless-analysis/
 - Wired versus wireless link comparison
 - Qualitative analysis of antenna alignment and obstruction effects
 - Python-based visualization of a clearly separated educational simulation
+- Unit tests and automated checks
 - Technical documentation of experimental results and limitations
 
 ## Academic context
